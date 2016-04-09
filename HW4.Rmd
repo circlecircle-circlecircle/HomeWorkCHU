@@ -3,6 +3,12 @@ title: "Facebook粉絲團分析（分析專頁名稱朱立倫）"
 output: github_document
 ---
 分析朱立倫從2016/01/01到2016/04/09發出的文章。
+```{r echo=T}
+if (!require('Rfacebook')){
+    install.packages("Rfacebook")
+    library(Rfacebook)
+}
+```
 
 ## 讀取朱立倫粉絲團資料
 ```{r echo=T}
