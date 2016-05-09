@@ -1,0 +1,63 @@
+---
+title: "Hotel"
+output: html_document
+---
+## 匯入旅店資料
+```{r setup, include=FALSE}
+install.packages("jsonlite")
+library("jsonlite")
+```
+
+
+```{r cars}
+Hotel_data <- fromJSON("http://data.taipei.gov.tw/opendata/apply/query/NDQxOEM2MDAtRDdGNS00NkQ2LUJCMUYtMURBMjlEQUI5MUU5?$format=json")
+head(Hotel_data)
+```
+
+## 國外來台觀光人口成長
+
+```{r pressure, echo=FALSE}
+forien_2015_data <- read.csv("C:/Users/jellyfish/Downloads/國外來台觀光人口成長-1.csv")
+head(forien_2015_data)
+
+forien_2014_data <- read.csv("C:/Users/jellyfish/Downloads/國外來台觀光人口成長-2.csv")
+head(forien_2014_data)
+
+forien_2013_data <- read.csv("C:/Users/jellyfish/Downloads/國外來台觀光人口成長-3.csv")
+head(forien_2013_data)
+
+forien_2012_data <- read.csv("C:/Users/jellyfish/Downloads/國外來台觀光人口成長-4.csv")
+head(forien_2012_data)
+
+forien_2011_data <- read.csv("C:/Users/jellyfish/Downloads/國外來台觀光人口成長-5.csv")
+head(forien_2011_data)
+
+forien_2010_data <- read.csv("C:/Users/jellyfish/Downloads/國外來台觀光人口成長-6.csv")
+head(forien_2010_data)
+
+```
+## 旅館營運報表
+
+```{r pressure, echo=FALSE}
+
+finance_2010_data <- read.csv("C:/Users/jellyfish/Downloads/旅館營運報表2010-1~12.csv")
+head(finance_2010_data)
+
+finance_2011_data <- read.csv("C:/Users/jellyfish/Downloads/旅館營運報表2011-1~12.csv")
+head(finance_2011_data)
+
+finance_2012_data <- read.csv("C:/Users/jellyfish/Downloads/旅館營運報表2012-1~12.csv")
+head(finance_2012_data)
+
+finance_2013_data <- read.csv("C:/Users/jellyfish/Downloads/旅館營運報表2013-1~12.csv")
+head(finance_2013_data)
+
+finance_2014_data <- read.csv("C:/Users/jellyfish/Downloads/旅館營運報表2014-1~12.csv")
+head(finance_2014_data)
+
+finance_2015_data <- read.csv("C:/Users/jellyfish/Downloads/旅館營運報表2015-1~12.csv")
+head(finance_2015_data)
+
+finance_2016_data <- read.csv("C:/Users/jellyfish/Downloads/旅館營運報表2016-1~3.csv")
+head(finance_2016_data)
+```
