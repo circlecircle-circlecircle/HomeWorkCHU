@@ -1,0 +1,60 @@
+---
+title: "1928-1969間，小兒麻痺在美國各州的發生率變化"
+output: html_document
+---
+## 資料前處理
+
+把資料讀進來:
+```{r echo=T}
+polio<-read.csv("C:/Users/jellyfish/Downloads/POLIO_Incidence.csv",stringsAsFactors = F)
+head(polio)
+```
+
+將寬表格轉為長表格: 
+```{r echo=T}
+
+library(reshape2)
+polio.m <- melt(polio,id.vars = c('YEAR','WEEK'))
+head(polio.m)
+```
+install.packages('Rcpp', dependencies = TRUE)
+install.packages("reshape2")
+
+處理缺值:
+```{r echo=T}
+polio.m[polio.m$value=="-",]$value<-NA #處理缺值,將"-"轉為NA
+polio.m$value<-as.numeric(polio.m$value) #將value欄位轉為數字
+
+```
+
+計算年度發生率: 
+```{r echo=T}
+polio.sumYear<- #各州各年度加總，計算該年度的發生率
+    aggregate(value~YEAR+variable,data=polio.m,FUN=sum,na.rm=F)
+head(polio.sumYear)
+```
+
+## 視覺畫呈現
+
+安裝面量圖需要用到的package，以及一些基本數據。
+```{r echo=T}
+library(ggplot2)
+```
+install.packages("choroplethr",dependencies = TRUE)
+install.packages("choroplethrMaps") 
+
+解釋如何選擇圖形種類:
+
+因為題目上需要同時有三個變數，所以我覺得用使用xy軸個代表一個性質，在配上色彩的可以區別各洲，是最好的選擇。
+
+程式碼+圖形呈現:
+
+```{r echo=T}
+ggplot(polio.sumYear, aes(x = YEAR, y = value,color=variable)) +
+geom_point()+geom_smooth(method='lm')
+
+```
+
+解釋圖形:
+
+x軸是年分，y軸是發生率，每洲有每個顏色。
