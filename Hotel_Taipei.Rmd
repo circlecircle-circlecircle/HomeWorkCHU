@@ -1,0 +1,39 @@
+---
+title: "Final-Taipei"
+output: html_document
+---
+
+```{r echo=T}
+library("jsonlite")
+Hotel_data <- fromJSON("http://data.taipei.gov.tw/opendata/apply/query/NDQxOEM2MDAtRDdGNS00NkQ2LUJCMUYtMURBMjlEQUI5MUU5?$format=json")
+head(Hotel_data)
+```
+
+```{r echo=T}
+
+library(reshape2)
+Hotel_data.m <- melt(Hotel_data,id.vars = c('cat1','cat2','stitle','address'))
+head(Hotel_data.m)
+```
+
+```{r echo=T}
+
+```
+
+```{r echo=T}
+library(ggmap)
+twmap.n <- get_map(c(121.43,24.93,121.62,25.19), zoom = 11,language = "zh-TW",maptype = 'roadmap')
+
+Hotel_data$longitude<-as.numeric(Hotel_data$longitude)
+Hotel_data$latitude<-as.numeric(Hotel_data$latitude)
+
+ggmap(twmap.n) 
+
+HotelMap = ggmap(twmap.n)+ geom_point(data=subset(Hotel_data), aes(x=Hotel_data$longitude, y=Hotel_data$latitude,color="red"))
+
+HotelMap
+```
+
+```{r echo=T}
+
+```

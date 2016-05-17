@@ -2,7 +2,7 @@
 title: "Hotel"
 output: html_document
 ---
-## åŒ¯å…¥æ—…åº—è³‡æ–™
+## ?Œ¯?…¥??…å?—è?‡æ??
 ```{r setup, include=FALSE}
 install.packages("jsonlite")
 library("jsonlite")
@@ -14,50 +14,50 @@ Hotel_data <- fromJSON("http://data.taipei.gov.tw/opendata/apply/query/NDQxOEM2M
 head(Hotel_data)
 ```
 
-## åœ‹å¤–ä¾†å°è§€å…‰äººå£æˆé•·
+## ??‹å?–ä?†å°è§€??‰äºº?£??é•·
 
 ```{r pressure, echo=FALSE}
-forien_2015_data <- read.csv("C:/Users/jellyfish/Downloads/åœ‹å¤–ä¾†å°è§€å…‰äººå£æˆé•·-1.csv")
+forien_2015_data <- read.csv("C:/Users/jellyfish/Downloads/??‹å?–ä?†å°è§€??‰äºº?£??é•·-1.csv")
 head(forien_2015_data)
 
-forien_2014_data <- read.csv("C:/Users/jellyfish/Downloads/åœ‹å¤–ä¾†å°è§€å…‰äººå£æˆé•·-2.csv")
+forien_2014_data <- read.csv("C:/Users/jellyfish/Downloads/??‹å?–ä?†å°è§€??‰äºº?£??é•·-2.csv")
 head(forien_2014_data)
 
-forien_2013_data <- read.csv("C:/Users/jellyfish/Downloads/åœ‹å¤–ä¾†å°è§€å…‰äººå£æˆé•·-3.csv")
+forien_2013_data <- read.csv("C:/Users/jellyfish/Downloads/??‹å?–ä?†å°è§€??‰äºº?£??é•·-3.csv")
 head(forien_2013_data)
 
-forien_2012_data <- read.csv("C:/Users/jellyfish/Downloads/åœ‹å¤–ä¾†å°è§€å…‰äººå£æˆé•·-4.csv")
+forien_2012_data <- read.csv("C:/Users/jellyfish/Downloads/??‹å?–ä?†å°è§€??‰äºº?£??é•·-4.csv")
 head(forien_2012_data)
 
-forien_2011_data <- read.csv("C:/Users/jellyfish/Downloads/åœ‹å¤–ä¾†å°è§€å…‰äººå£æˆé•·-5.csv")
+forien_2011_data <- read.csv("C:/Users/jellyfish/Downloads/??‹å?–ä?†å°è§€??‰äºº?£??é•·-5.csv")
 head(forien_2011_data)
 
-forien_2010_data <- read.csv("C:/Users/jellyfish/Downloads/åœ‹å¤–ä¾†å°è§€å…‰äººå£æˆé•·-6.csv")
+forien_2010_data <- read.csv("C:/Users/jellyfish/Downloads/??‹å?–ä?†å°è§€??‰äºº?£??é•·-6.csv")
 head(forien_2010_data)
 
 ```
-## æ—…é¤¨ç‡Ÿé‹å ±è¡¨
+## ??…é¤¨??Ÿé?‹å ±è¡?
 
 ```{r pressure, echo=FALSE}
 
-finance_2010_data <- read.csv("C:/Users/jellyfish/Downloads/æ—…é¤¨ç‡Ÿé‹å ±è¡¨2010-1~12.csv")
+finance_2010_data <- read.csv("C:/Users/jellyfish/Downloads/??…é¤¨??Ÿé?‹å ±è¡?2010-1~12.csv")
 head(finance_2010_data)
 
-finance_2011_data <- read.csv("C:/Users/jellyfish/Downloads/æ—…é¤¨ç‡Ÿé‹å ±è¡¨2011-1~12.csv")
+finance_2011_data <- read.csv("C:/Users/jellyfish/Downloads/??…é¤¨??Ÿé?‹å ±è¡?2011-1~12.csv")
 head(finance_2011_data)
 
-finance_2012_data <- read.csv("C:/Users/jellyfish/Downloads/æ—…é¤¨ç‡Ÿé‹å ±è¡¨2012-1~12.csv")
+finance_2012_data <- read.csv("C:/Users/jellyfish/Downloads/??…é¤¨??Ÿé?‹å ±è¡?2012-1~12.csv")
 head(finance_2012_data)
 
-finance_2013_data <- read.csv("C:/Users/jellyfish/Downloads/æ—…é¤¨ç‡Ÿé‹å ±è¡¨2013-1~12.csv")
+finance_2013_data <- read.csv("C:/Users/jellyfish/Downloads/??…é¤¨??Ÿé?‹å ±è¡?2013-1~12.csv")
 head(finance_2013_data)
 
-finance_2014_data <- read.csv("C:/Users/jellyfish/Downloads/æ—…é¤¨ç‡Ÿé‹å ±è¡¨2014-1~12.csv")
+finance_2014_data <- read.csv("C:/Users/jellyfish/Downloads/??…é¤¨??Ÿé?‹å ±è¡?2014-1~12.csv")
 head(finance_2014_data)
 
-finance_2015_data <- read.csv("C:/Users/jellyfish/Downloads/æ—…é¤¨ç‡Ÿé‹å ±è¡¨2015-1~12.csv")
+finance_2015_data <- read.csv("C:/Users/jellyfish/Downloads/??…é¤¨??Ÿé?‹å ±è¡?2015-1~12.csv")
 head(finance_2015_data)
 
-finance_2016_data <- read.csv("C:/Users/jellyfish/Downloads/æ—…é¤¨ç‡Ÿé‹å ±è¡¨2016-1~3.csv")
+finance_2016_data <- read.csv("C:/Users/jellyfish/Downloads/??…é¤¨??Ÿé?‹å ±è¡?2016-1~3.csv")
 head(finance_2016_data)
 ```
