@@ -2,62 +2,245 @@
 title: "Hotel"
 output: html_document
 ---
-## ?Œ¯?…¥??…å?—è?‡æ??
-```{r setup, include=FALSE}
-install.packages("jsonlite")
+```{r echo=T}
 library("jsonlite")
-```
-
-
-```{r cars}
 Hotel_data <- fromJSON("http://data.taipei.gov.tw/opendata/apply/query/NDQxOEM2MDAtRDdGNS00NkQ2LUJCMUYtMURBMjlEQUI5MUU5?$format=json")
 head(Hotel_data)
 ```
 
-## ??‹å?–ä?†å°è§€??‰äºº?£??é•·
+```{r echo=T}
 
-```{r pressure, echo=FALSE}
-forien_2015_data <- read.csv("C:/Users/jellyfish/Downloads/??‹å?–ä?†å°è§€??‰äºº?£??é•·-1.csv")
-head(forien_2015_data)
+library(reshape2)
+Hotel_data.m <- melt(Hotel_data,id.vars = c('cat1','cat2','stitle','address'))
+head(Hotel_data.m)
+```
 
-forien_2014_data <- read.csv("C:/Users/jellyfish/Downloads/??‹å?–ä?†å°è§€??‰äºº?£??é•·-2.csv")
-head(forien_2014_data)
-
-forien_2013_data <- read.csv("C:/Users/jellyfish/Downloads/??‹å?–ä?†å°è§€??‰äºº?£??é•·-3.csv")
-head(forien_2013_data)
-
-forien_2012_data <- read.csv("C:/Users/jellyfish/Downloads/??‹å?–ä?†å°è§€??‰äºº?£??é•·-4.csv")
-head(forien_2012_data)
-
-forien_2011_data <- read.csv("C:/Users/jellyfish/Downloads/??‹å?–ä?†å°è§€??‰äºº?£??é•·-5.csv")
-head(forien_2011_data)
-
-forien_2010_data <- read.csv("C:/Users/jellyfish/Downloads/??‹å?–ä?†å°è§€??‰äºº?£??é•·-6.csv")
-head(forien_2010_data)
+#Âù¥_¥«¦í±J¤ÀÃþ
+```{r echo=T}
+aggregate(Hotel_data.m$cat2,by=list(Hotel_data.m$cat2),FUN=length)
+#²Ä¤@­ÓÄæ¦ì¬O¥¼¤ÀÃþªº¼Æ¶q¡A¨C­Ó¼Æ¦r¥[Á`´N¬OÂù¥_¥«Á`¦@ªº®ÈÀ]¼Æ
+```
+##¥x¥_¥«¦í±J¤ÀÃþ
+```{r echo=T}
+Taipei <-Hotel_data.m[grep("»O¥_¥«",Hotel_data.m$address),]
+aggregate(Taipei$cat2,by=list(Taipei$cat2),FUN=length)
 
 ```
-## ??…é¤¨??Ÿé?‹å ±è¡?
-
-```{r pressure, echo=FALSE}
-
-finance_2010_data <- read.csv("C:/Users/jellyfish/Downloads/??…é¤¨??Ÿé?‹å ±è¡?2010-1~12.csv")
-head(finance_2010_data)
-
-finance_2011_data <- read.csv("C:/Users/jellyfish/Downloads/??…é¤¨??Ÿé?‹å ±è¡?2011-1~12.csv")
-head(finance_2011_data)
-
-finance_2012_data <- read.csv("C:/Users/jellyfish/Downloads/??…é¤¨??Ÿé?‹å ±è¡?2012-1~12.csv")
-head(finance_2012_data)
-
-finance_2013_data <- read.csv("C:/Users/jellyfish/Downloads/??…é¤¨??Ÿé?‹å ±è¡?2013-1~12.csv")
-head(finance_2013_data)
-
-finance_2014_data <- read.csv("C:/Users/jellyfish/Downloads/??…é¤¨??Ÿé?‹å ±è¡?2014-1~12.csv")
-head(finance_2014_data)
-
-finance_2015_data <- read.csv("C:/Users/jellyfish/Downloads/??…é¤¨??Ÿé?‹å ±è¡?2015-1~12.csv")
-head(finance_2015_data)
-
-finance_2016_data <- read.csv("C:/Users/jellyfish/Downloads/??…é¤¨??Ÿé?‹å ±è¡?2016-1~3.csv")
-head(finance_2016_data)
+¥x¥_¥« ¤¤¥¿°Ï
+```{r echo=T}
+Taipei.100 <-Taipei[grep("¤¤¥¿°Ï",Taipei$address),]
+aggregate(Taipei.100$cat2,by=list(Taipei.100$cat2),FUN=length)
 ```
+¥x¥_¥« ¤j¦P°Ï
+```{r echo=T}
+Taipei.103 <-Taipei[grep("¤j¦P°Ï",Taipei$address),]
+aggregate(Taipei.103$cat2,by=list(Taipei.103$cat2),FUN=length)
+
+```
+¥x¥_¥« ¤¤¤s°Ï
+```{r echo=T}
+Taipei.104 <-Taipei[grep("¤¤¤s°Ï",Taipei$address),]
+aggregate(Taipei.104$cat2,by=list(Taipei.104$cat2),FUN=length)
+
+```
+¥x¥_¥« ªQ¤s°Ï
+```{r echo=T}
+Taipei.105 <-Taipei[grep("ªQ¤s°Ï",Taipei$address),]
+aggregate(Taipei.105$cat2,by=list(Taipei.105$cat2),FUN=length)
+
+```
+¥x¥_¥« ¤j¦w°Ï
+```{r echo=T}
+Taipei.106 <-Taipei[grep("¤j¦w°Ï",Taipei$address),]
+aggregate(Taipei.106$cat2,by=list(Taipei.106$cat2),FUN=length)
+
+```
+¥x¥_¥« ¸UµØ°Ï
+```{r echo=T}
+Taipei.108 <-Taipei[grep("¸UµØ°Ï",Taipei$address),]
+aggregate(Taipei.108$cat2,by=list(Taipei.108$cat2),FUN=length)
+```
+¥x¥_¥« «H¸q°Ï
+```{r echo=T}
+Taipei.110 <-Taipei[grep("«H¸q°Ï",Taipei$address),]
+aggregate(Taipei.110$cat2,by=list(Taipei.110$cat2),FUN=length)
+```
+¥x¥_¥« ¤hªL°Ï
+```{r echo=T}
+Taipei.111 <-Taipei[grep("¤hªL°Ï",Taipei$address),]
+aggregate(Taipei.111$cat2,by=list(Taipei.111$cat2),FUN=length)
+```
+¥x¥_¥« ¥_§ë°Ï
+```{r echo=T}
+Taipei.112 <-Taipei[grep("¥_§ë°Ï",Taipei$address),]
+aggregate(Taipei.112$cat2,by=list(Taipei.112$cat2),FUN=length)
+```
+¥x¥_¥« ¤º´ò°Ï
+```{r echo=T}
+Taipei.114 <-Taipei[grep("¤º´ò°Ï",Taipei$address),]
+aggregate(Taipei.114$cat2,by=list(Taipei.114$cat2),FUN=length)
+```
+¥x¥_¥« «n´ä°Ï
+```{r echo=T}
+Taipei.115 <-Taipei[grep("«n´ä°Ï",Taipei$address),]
+aggregate(Taipei.115$cat2,by=list(Taipei.115$cat2),FUN=length)
+```
+¥x¥_¥« ¤å¤s°Ï
+```{r echo=T}
+Taipei.116 <-Taipei[grep("¤å¤s°Ï",Taipei$address),]
+aggregate(Taipei.116$cat2,by=list(Taipei.116$cat2),FUN=length)
+```
+
+##·s¥_¥«¦í±J¤ÀÃþ(µo²{¥L­Ì³£¨S¦³¤ÀÃþex:¤@¯ë®ÈÀ],¤@¯ëÆ[¥ú®ÈÀ]...)
+```{r echo=T}
+NEW_Taipei <-Hotel_data.m[grep("·s¥_¥«",Hotel_data.m$address),]
+aggregate(NEW_Taipei$cat2,by=list(NEW_Taipei$cat2),FUN=length)
+```
+
+
+·s¥_¥« ¸U¨½°Ï
+```{r echo=T}
+NEW_Taipei.207 <-NEW_Taipei[grep("¸U¨½°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.207$cat2,by=list(NEW_Taipei.207$cat2),FUN=length)
+```
+·s¥_¥« ª÷¤s°Ï
+```{r echo=T}
+NEW_Taipei.208 <-NEW_Taipei[grep("ª÷¤s°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.208$cat2,by=list(NEW_Taipei.208$cat2),FUN=length)
+```
+·s¥_¥« ªO¾ô°Ï
+```{r echo=T}
+NEW_Taipei.220 <-NEW_Taipei[grep("ªO¾ô°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.220$cat2,by=list(NEW_Taipei.220$cat2),FUN=length)
+```
+·s¥_¥« ¦Á¤î°Ï
+```{r echo=T}
+NEW_Taipei.221 <-NEW_Taipei[grep("¦Á¤î°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.221 $cat2,by=list(NEW_Taipei.221 $cat2),FUN=length)
+```
+·s¥_¥« ²`§|°Ï
+```{r echo=T}
+NEW_Taipei.222 <-NEW_Taipei[grep("²`§|°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.222$cat2,by=list(NEW_Taipei.222$cat2),FUN=length)
+```
+·s¥_¥« ¥ÛÞä°Ï
+```{r echo=T}
+NEW_Taipei.223 <-NEW_Taipei[grep("¥ÛÞä°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.223$cat2,by=list(NEW_Taipei.223$cat2),FUN=length)
+```
+·s¥_¥« ·çªÚ°Ï
+```{r echo=T}
+NEW_Taipei.224 <-NEW_Taipei[grep("·çªÚ°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.224$cat2,by=list(NEW_Taipei.224$cat2),FUN=length)
+```
+·s¥_¥« ¥­·Ë°Ï
+```{r echo=T}
+NEW_Taipei.226 <-NEW_Taipei[grep("¥­·Ë°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.226$cat2,by=list(NEW_Taipei.226$cat2),FUN=length)
+```
+·s¥_¥« Âù·Ë°Ï
+```{r echo=T}
+NEW_Taipei.227 <-NEW_Taipei[grep("Âù·Ë°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.227$cat2,by=list(NEW_Taipei.227$cat2),FUN=length)
+```
+·s¥_¥« °^¼d°Ï
+```{r echo=T}
+NEW_Taipei.228 <-NEW_Taipei[grep("°^¼d°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.228$cat2,by=list(NEW_Taipei.228$cat2),FUN=length)
+```
+·s¥_¥« ·s©±°Ï
+```{r echo=T}
+NEW_Taipei.231 <-NEW_Taipei[grep("·s©±°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.231$cat2,by=list(NEW_Taipei.231$cat2),FUN=length)
+```
+·s¥_¥« ©WªL°Ï
+```{r echo=T}
+NEW_Taipei.232 <-NEW_Taipei[grep("©WªL°Ï",NEW_Taipei$address),]
+NEW_Taipei.232
+```
+·s¥_¥« ¯Q¨Ó°Ï
+```{r echo=T}
+NEW_Taipei.233 <-NEW_Taipei[grep("¯Q¨Ó°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.233$cat2,by=list(NEW_Taipei.233$cat2),FUN=length)
+```
+·s¥_¥« ¥Ã©M°Ï
+```{r echo=T}
+NEW_Taipei.234 <-NEW_Taipei[grep("¥Ã©M°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.234$cat2,by=list(NEW_Taipei.234$cat2),FUN=length)
+```
+·s¥_¥« ¤¤©M°Ï
+```{r echo=T}
+NEW_Taipei.235 <-NEW_Taipei[grep("¤¤©M°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.235$cat2,by=list(NEW_Taipei.235$cat2),FUN=length)
+```
+·s¥_¥« ¤g«°°Ï
+```{r echo=T}
+NEW_Taipei.236 <-NEW_Taipei[grep("¤g«°°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.236$cat2,by=list(NEW_Taipei.236$cat2),FUN=length)
+```
+·s¥_¥« ¤T®l°Ï
+```{r echo=T}
+NEW_Taipei.237 <-NEW_Taipei[grep("¤T®l°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.237$cat2,by=list(NEW_Taipei.237$cat2),FUN=length)
+```
+·s¥_¥« ¾ðªL°Ï
+```{r echo=T}
+NEW_Taipei.238 <-NEW_Taipei[grep("¾ðªL°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.238$cat2,by=list(NEW_Taipei.238$cat2),FUN=length)
+```
+·s¥_¥« Åaºq°Ï
+```{r echo=T}
+NEW_Taipei.239 <-NEW_Taipei[grep("Åaºq°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.239$cat2,by=list(NEW_Taipei.239$cat2),FUN=length)
+```
+·s¥_¥« ¤T­«°Ï
+```{r echo=T}
+NEW_Taipei.241 <-NEW_Taipei[grep("¤T­«°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.241$cat2,by=list(NEW_Taipei.241$cat2),FUN=length)
+```
+·s¥_¥« ·s²ø°Ï
+```{r echo=T}
+NEW_Taipei.242 <-NEW_Taipei[grep("·s²ø°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.242$cat2,by=list(NEW_Taipei.242$cat2),FUN=length)
+```
+·s¥_¥« ®õ¤s°Ï
+```{r echo=T}
+NEW_Taipei.243 <-NEW_Taipei[grep("®õ¤s°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.243$cat2,by=list(NEW_Taipei.243$cat2),FUN=length)
+```
+·s¥_¥« ªL¤f°Ï
+```{r echo=T}
+NEW_Taipei.244 <-NEW_Taipei[grep("ªL¤f°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.244$cat2,by=list(NEW_Taipei.244$cat2),FUN=length)
+```
+·s¥_¥« Äª¬w°Ï
+```{r echo=T}
+NEW_Taipei.247 <-NEW_Taipei[grep("Äª¬w°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.247$cat2,by=list(NEW_Taipei.247$cat2),FUN=length)
+```
+·s¥_¥« ¤­ªÑ°Ï
+```{r echo=T}
+NEW_Taipei.248 <-NEW_Taipei[grep("¤­ªÑ°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.248$cat2,by=list(NEW_Taipei.248$cat2),FUN=length)
+```
+·s¥_¥« ¤K¨½°Ï
+```{r echo=T}
+NEW_Taipei.249 <-NEW_Taipei[grep("¤K¨½°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.249$cat2,by=list(NEW_Taipei.249$cat2),FUN=length)
+```
+·s¥_¥« ²H¤ô°Ï
+```{r echo=T}
+NEW_Taipei.251 <-NEW_Taipei[grep("²H¤ô°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.251$cat2,by=list(NEW_Taipei.251$cat2),FUN=length)
+```
+·s¥_¥« ¤TªÛ°Ï
+```{r echo=T}
+NEW_Taipei.252 <-NEW_Taipei[grep("¤TªÛ°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.252$cat2,by=list(NEW_Taipei.252$cat2),FUN=length)
+```
+·s¥_¥« ¥Ûªù°Ï
+```{r echo=T}
+NEW_Taipei.253 <-NEW_Taipei[grep("¥Ûªù°Ï",NEW_Taipei$address),]
+aggregate(NEW_Taipei.253$cat2,by=list(NEW_Taipei.253$cat2),FUN=length)
+```
+

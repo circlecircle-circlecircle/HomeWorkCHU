@@ -31,6 +31,3 @@ HotelMap = ggmap(twmap.n)+ geom_point(data=subset(Hotel_data), aes(x=Hotel_data$
 HotelMap
 ```
 
-```{r echo=T}
-
-```
