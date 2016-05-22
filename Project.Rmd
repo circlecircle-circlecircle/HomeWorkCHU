@@ -1,6 +1,6 @@
 ---
 title: "Hotel"
-output: html_document
+output: github_document
 ---
 ```{r echo=T}
 library("jsonlite")
