@@ -1,0 +1,77 @@
+---
+title: "FinalHW"
+output: github_document
+---
+
+# 糖尿病 預測模型
+
+## 資料前處理
+
+##解釋資料
+此資料來源為UCI Machine Learning Repository。
+資料是文森特Sigillito研究中心提供的，內有768筆資料，有8種屬性，主要是由糖尿病研究所中的消化和腎臟病的數據庫，來判斷這個人是否有可能罹患糖尿病的可能，此資料中有遺失的值。另外，分類結果為二元分類，藥檢呈陰性糖尿病 (neg) 與藥檢呈陽性糖尿病 (pos) 
+```{r}
+library(mlbench)
+data(PimaIndiansDiabetes)
+str(PimaIndiansDiabetes) 
+```
+
+##把資料讀進來 
+```{r}
+library(mlbench)
+data(PimaIndiansDiabetes)
+head(PimaIndiansDiabetes) 
+```
+
+##資料前處理
+```{r}
+PimaIndiansDiabetesC<-
+    PimaIndiansDiabetes[complete.cases(PimaIndiansDiabetes),] 
+c(nrow(PimaIndiansDiabetes),nrow(PimaIndiansDiabetesC))
+```
+
+##分成訓練組跟測試組，並紀錄各組人數
+隨機將2/3的資料分到訓練組（Test==F），剩下1/3為測試組（Test==T）
+```{r}
+PimaIndiansDiabetesC$Test<-F 
+PimaIndiansDiabetesC[
+    sample(1:nrow(PimaIndiansDiabetesC),nrow(PimaIndiansDiabetesC)/3),
+     ]$Test<-T 
+c(sum(PimaIndiansDiabetesC$Test==F),sum(PimaIndiansDiabetesC$Test==T)) 
+```
+可見訓練組案例為512，測驗組案例為256
+
+## 預測模型建立
+
+由於變數多，且輸出為二元類別變數，故選擇邏輯迴歸演算法建立模型，並使用雙向逐步選擇最佳參數組合。
+```{r}
+fit<-glm(diabetes~., PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==F,],family="binomial")
+library(MASS)
+finalFit<-stepAIC(fit,direction = "both",trace = F)
+summary(finalFit)$coefficients
+```
+
+##模型說明
+由上述參數可知，使用多種參數來檢測人體所得到的資料，以邏輯迴歸建立模型預測是否為糖尿病患者，經最佳化後，模型使用參數為pregnant, glucose, pressure, mass, pedigree,，共4個參數，各參數代表從人體檢測出來的數據值。
+
+##預測模型驗證
+
+```{r}
+MinePred<-predict(finalFit,newdata = PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==T,])
+MineAns<-ifelse(MinePred<0.5,"neg","pos") #<0.5: Level 1
+MineAns<-factor(MineAns,levels = c("neg","pos"))
+MineAns
+```
+
+```{r}
+library(caret) # install.packages("caret") #計算參數的packages
+sensitivity(MineAns,PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==T,]$diabetes)
+specificity(MineAns,PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==T,]$diabetes)
+posPredValue(MineAns,PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==T,]$diabetes)
+negPredValue(MineAns,PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==T,]$diabetes)
+```
+
+- 敏感度 `r sensitivity(MineAns,PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==T,]$diabetes)*100`%
+- 特異性 `r specificity(MineAns,PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==T,]$diabetes)*100`%
+- 陽性預測率 `r posPredValue(MineAns,PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==T,]$diabetes)*100`%
+- 陰性預測率 `r negPredValue(MineAns,PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==T,]$diabetes)*100`%
