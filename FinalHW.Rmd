@@ -9,7 +9,7 @@ output: github_document
 
 ##解釋資料
 此資料來源為UCI Machine Learning Repository。
-資料是文森特Sigillito研究中心提供的，內有768筆資料，有8種屬性，主要是由糖尿病研究所中的消化和腎臟病的數據庫，來判斷這個人是否有可能罹患糖尿病的可能，此資料中有遺失的值。另外，分類結果為二元分類，藥檢呈陰性糖尿病 (neg) 與藥檢呈陽性糖尿病 (pos) 
+資料是文森特Sigillito研究中心提供的，內有768筆資料，有8種屬性，主要是由糖尿病研究所中的消化和腎臟病的數據庫，來判斷這個人是否有可能罹患糖尿病的可能，此資料中有遺失的值。另外，分類結果為二元分類，藥檢呈陰性糖尿病 (neg) 與藥檢呈陽性糖尿病 (pos) 。
 ```{r}
 library(mlbench)
 data(PimaIndiansDiabetes)
@@ -60,7 +60,6 @@ summary(finalFit)$coefficients
 MinePred<-predict(finalFit,newdata = PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==T,])
 MineAns<-ifelse(MinePred<0.5,"neg","pos") #<0.5: Level 1
 MineAns<-factor(MineAns,levels = c("neg","pos"))
-MineAns
 ```
 
 ```{r}

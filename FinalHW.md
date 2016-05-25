@@ -10,7 +10,7 @@ FinalHW
 解釋資料
 --------
 
-此資料來源為UCI Machine Learning Repository。 資料是文森特Sigillito研究中心提供的，內有768筆資料，有8種屬性，主要是由糖尿病研究所中的消化和腎臟病的數據庫，來判斷這個人是否有可能罹患糖尿病的可能，此資料中有遺失的值。另外，分類結果為二元分類，藥檢呈陰性糖尿病 (neg) 與藥檢呈陽性糖尿病 (pos)
+此資料來源為UCI Machine Learning Repository。 資料是文森特Sigillito研究中心提供的，內有768筆資料，有8種屬性，主要是由糖尿病研究所中的消化和腎臟病的數據庫，來判斷這個人是否有可能罹患糖尿病的可能，此資料中有遺失的值。另外，分類結果為二元分類，藥檢呈陰性糖尿病 (neg) 與藥檢呈陽性糖尿病 (pos) 。
 
 ``` r
 library(mlbench)
@@ -86,14 +86,15 @@ finalFit<-stepAIC(fit,direction = "both",trace = F)
 summary(finalFit)$coefficients
 ```
 
-    ##                 Estimate  Std. Error    z value     Pr(>|z|)
-    ## (Intercept) -9.108468925 0.908970325 -10.020645 1.236931e-23
-    ## pregnant     0.192655631 0.036602681   5.263430 1.413927e-07
-    ## glucose      0.043484985 0.004741616   9.170921 4.689963e-20
-    ## pressure    -0.016331008 0.006626344  -2.464558 1.371824e-02
-    ## insulin     -0.003824707 0.001117187  -3.423515 6.181676e-04
-    ## mass         0.100845849 0.018160660   5.552984 2.808345e-08
-    ## pedigree     0.999617378 0.373992359   2.672828 7.521473e-03
+    ##                 Estimate  Std. Error   z value     Pr(>|z|)
+    ## (Intercept) -9.252240868 0.943413544 -9.807195 1.048421e-22
+    ## pregnant     0.099629169 0.039184946  2.542537 1.100510e-02
+    ## glucose      0.038558105 0.004597741  8.386314 5.016209e-17
+    ## pressure    -0.012000455 0.006679026 -1.796737 7.237732e-02
+    ## insulin     -0.002087749 0.001133852 -1.841288 6.557935e-02
+    ## mass         0.085699472 0.017867260  4.796453 1.614999e-06
+    ## pedigree     1.159703360 0.381804615  3.037426 2.386078e-03
+    ## age          0.030477252 0.012169764  2.504342 1.226794e-02
 
 模型說明
 --------
@@ -110,36 +111,36 @@ MineAns<-factor(MineAns,levels = c("neg","pos"))
 MineAns
 ```
 
-    ##   2   4   7   8  11  14  15  16  17  21  22  26  28  31  33  37  39  41 
-    ## neg neg neg neg neg neg neg neg neg pos neg neg neg neg neg pos pos neg 
-    ##  42  44  45  46  53  63  65  66  69  72  74  79  80  81  82  84  87  97 
-    ## neg neg neg neg neg neg pos pos neg pos neg neg neg neg neg neg pos neg 
-    ##  98 100 107 108 109 113 117 121 127 131 136 139 143 149 150 152 153 160 
-    ## neg neg neg neg neg pos neg neg pos neg neg pos neg neg neg neg neg neg 
-    ## 162 166 167 168 169 171 176 182 184 186 190 192 197 198 200 202 205 206 
-    ## pos pos neg neg neg neg neg neg neg neg neg neg neg neg pos pos neg pos 
-    ## 207 209 211 212 213 217 222 223 226 234 235 239 241 245 246 248 249 251 
-    ## neg neg neg neg pos neg neg neg neg neg neg pos pos neg pos neg neg neg 
-    ## 257 258 259 260 263 264 267 273 274 275 277 279 280 285 286 288 290 291 
-    ## neg pos pos neg pos neg neg neg neg neg neg pos neg neg neg neg neg pos 
-    ## 297 298 303 307 308 309 312 313 317 324 331 334 337 340 341 343 345 346 
-    ## neg neg neg neg neg neg neg neg neg neg neg pos neg pos neg neg pos neg 
-    ## 349 350 356 357 358 359 364 368 369 371 372 375 383 384 387 389 390 391 
-    ## neg neg neg neg neg neg pos pos pos neg neg neg pos neg pos neg neg neg 
-    ## 396 398 401 402 406 407 415 417 418 422 423 425 427 437 438 439 442 443 
-    ## neg pos neg neg pos neg neg neg neg neg neg neg neg pos neg neg pos neg 
-    ## 445 447 448 454 456 464 468 471 472 474 475 477 481 482 483 489 491 492 
-    ## pos pos neg neg neg neg neg pos pos neg neg pos neg pos pos neg neg neg 
-    ## 495 497 501 502 505 510 512 518 519 522 528 537 546 548 551 554 557 558 
-    ## pos neg neg neg neg pos pos pos neg neg neg neg neg neg neg neg pos neg 
-    ## 561 562 563 565 570 575 579 580 581 585 600 606 607 610 611 612 623 627 
+    ##  11  13  14  15  19  24  25  28  42  47  50  51  53  54  55  59  60  62 
+    ## neg pos neg neg pos neg neg neg neg neg pos pos pos neg neg neg neg neg 
+    ##  63  65  71  72  76  77  78  80  84  85  92  99 104 109 111 112 119 120 
+    ## neg neg neg neg neg pos neg pos neg neg neg neg neg neg neg neg neg neg 
+    ## 123 126 134 135 137 142 145 146 153 156 160 162 165 167 169 171 173 174 
+    ## neg pos pos pos pos pos neg neg neg neg pos neg neg neg neg pos neg neg 
+    ## 176 180 181 183 186 187 192 193 196 197 199 200 201 203 204 205 209 210 
+    ## neg neg neg neg neg neg neg neg pos neg neg neg pos pos neg pos pos neg 
+    ## 213 215 216 217 221 223 224 225 226 227 236 237 241 245 246 247 248 249 
+    ## pos neg neg neg neg neg neg neg pos neg neg neg neg neg pos neg neg neg 
+    ## 256 260 263 264 269 271 272 273 276 277 278 279 280 285 293 298 300 301 
+    ## pos neg neg neg neg neg pos neg neg pos neg neg neg neg neg neg neg pos 
+    ## 303 305 309 310 314 315 317 329 331 338 339 340 345 348 350 351 353 356 
+    ## neg neg pos neg neg neg neg neg neg neg neg pos neg neg neg neg pos neg 
+    ## 359 362 363 364 367 369 370 374 375 376 381 385 388 389 401 402 406 407 
+    ## neg neg pos neg neg neg pos neg neg pos neg neg neg neg neg neg neg neg 
+    ## 408 410 411 414 415 416 421 424 429 431 434 435 438 446 447 449 454 456 
+    ## neg neg neg pos pos neg neg neg neg neg neg pos neg neg pos pos neg neg 
+    ## 460 469 470 474 477 485 488 490 491 496 505 511 519 520 521 522 531 534 
+    ## neg neg neg neg neg pos neg neg pos neg neg neg neg neg neg neg pos pos 
+    ## 537 541 544 546 550 553 554 561 563 570 573 579 581 584 586 588 589 591 
     ## neg neg neg neg neg neg neg neg neg neg neg neg neg neg neg neg pos neg 
-    ## 629 636 642 643 650 652 655 656 659 660 663 665 670 672 682 692 693 695 
-    ## neg neg neg pos neg neg neg neg pos pos neg neg neg pos neg neg neg pos 
-    ## 696 702 704 705 708 710 714 721 725 726 727 729 735 740 745 747 748 749 
-    ## neg neg neg pos neg neg neg neg neg neg neg pos pos neg neg neg neg neg 
-    ## 754 755 756 762 
-    ## neg neg neg neg 
+    ## 593 603 605 608 611 614 619 620 627 628 630 633 637 638 646 647 649 651 
+    ## neg pos neg neg pos pos neg neg neg neg pos neg neg neg neg neg neg neg 
+    ## 656 657 658 659 661 665 670 673 682 685 686 687 693 695 699 701 703 705 
+    ## neg neg neg neg pos neg neg neg neg neg pos neg neg neg neg neg pos neg 
+    ## 707 709 712 713 714 718 720 721 722 724 726 731 733 742 751 753 754 756 
+    ## neg neg neg neg neg neg pos neg neg neg neg neg neg neg neg pos neg pos 
+    ## 760 762 766 768 
+    ## neg pos neg neg 
     ## Levels: neg pos
 
 ``` r
@@ -154,27 +155,27 @@ library(caret) # install.packages("caret") #計算參數的packages
 sensitivity(MineAns,PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==T,]$diabetes)
 ```
 
-    ## [1] 0.8895706
+    ## [1] 0.9360465
 
 ``` r
 specificity(MineAns,PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==T,]$diabetes)
 ```
 
-    ## [1] 0.4193548
+    ## [1] 0.5
 
 ``` r
 posPredValue(MineAns,PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==T,]$diabetes)
 ```
 
-    ## [1] 0.7286432
+    ## [1] 0.7931034
 
 ``` r
 negPredValue(MineAns,PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==T,]$diabetes)
 ```
 
-    ## [1] 0.6842105
+    ## [1] 0.7924528
 
--   敏感度 88.9570552%
--   特異性 41.9354839%
--   陽性預測率 72.8643216%
--   陰性預測率 68.4210526%
+-   敏感度 93.6046512%
+-   特異性 50%
+-   陽性預測率 79.3103448%
+-   陰性預測率 79.245283%
