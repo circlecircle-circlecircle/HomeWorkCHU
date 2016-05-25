@@ -77,29 +77,29 @@ c(sum(PimaIndiansDiabetesC$Test==F),sum(PimaIndiansDiabetesC$Test==T))
 預測模型建立
 ------------
 
-由於變數多，且輸出為二元類別變數，故選擇邏輯迴歸演算法建立模型，並使用雙向逐步選擇最佳參數組合。
+由於變數多，且輸出為二元類別變數，故選擇多變數線性迴歸演算法建立模型，並使用雙向逐步選擇最佳參數組合。
 
 ``` r
-fit<-glm(diabetes~., PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==F,],family="binomial")
+fit<-glm(diabetes~age+pedigree+mass+insulin+triceps+pressure+glucose+pregnant, PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==F,],family="binomial")
+
 library(MASS)
 finalFit<-stepAIC(fit,direction = "both",trace = F)
 summary(finalFit)$coefficients
 ```
 
-    ##                 Estimate  Std. Error   z value     Pr(>|z|)
-    ## (Intercept) -9.252240868 0.943413544 -9.807195 1.048421e-22
-    ## pregnant     0.099629169 0.039184946  2.542537 1.100510e-02
-    ## glucose      0.038558105 0.004597741  8.386314 5.016209e-17
-    ## pressure    -0.012000455 0.006679026 -1.796737 7.237732e-02
-    ## insulin     -0.002087749 0.001133852 -1.841288 6.557935e-02
-    ## mass         0.085699472 0.017867260  4.796453 1.614999e-06
-    ## pedigree     1.159703360 0.381804615  3.037426 2.386078e-03
-    ## age          0.030477252 0.012169764  2.504342 1.226794e-02
+    ##                 Estimate   Std. Error   z value     Pr(>|z|)
+    ## (Intercept) -7.818200567 0.8173905201 -9.564829 1.123871e-21
+    ## pedigree     0.946467298 0.3466303771  2.730480 6.324218e-03
+    ## mass         0.073239704 0.0171892407  4.260788 2.037077e-05
+    ## insulin     -0.001969765 0.0009857966 -1.998145 4.570090e-02
+    ## pressure    -0.010208418 0.0057390776 -1.778756 7.527979e-02
+    ## glucose      0.037157075 0.0043717862  8.499289 1.907553e-17
+    ## pregnant     0.116281769 0.0343544507  3.384766 7.123901e-04
 
 模型說明
 --------
 
-由上述參數可知，使用多種參數來檢測人體所得到的資料，以邏輯迴歸建立模型預測是否為糖尿病患者，經最佳化後，模型使用參數為pregnant, glucose, pressure, mass, pedigree,，共4個參數，各參數代表從人體檢測出來的數據值。
+由上述參數可知，使用多種參數來檢測人體所得到的資料，以多變數線性迴歸建立模型預測是否為糖尿病患者，經最佳化後，模型使用參數為age,pedigree+mass,insulin,triceps,pressure,glucose,pregnant，共個參數，各參數代表從人體檢測出來的數據值。
 
 預測模型驗證
 ------------
@@ -108,40 +108,7 @@ summary(finalFit)$coefficients
 MinePred<-predict(finalFit,newdata = PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==T,])
 MineAns<-ifelse(MinePred<0.5,"neg","pos") #<0.5: Level 1
 MineAns<-factor(MineAns,levels = c("neg","pos"))
-MineAns
 ```
-
-    ##  11  13  14  15  19  24  25  28  42  47  50  51  53  54  55  59  60  62 
-    ## neg pos neg neg pos neg neg neg neg neg pos pos pos neg neg neg neg neg 
-    ##  63  65  71  72  76  77  78  80  84  85  92  99 104 109 111 112 119 120 
-    ## neg neg neg neg neg pos neg pos neg neg neg neg neg neg neg neg neg neg 
-    ## 123 126 134 135 137 142 145 146 153 156 160 162 165 167 169 171 173 174 
-    ## neg pos pos pos pos pos neg neg neg neg pos neg neg neg neg pos neg neg 
-    ## 176 180 181 183 186 187 192 193 196 197 199 200 201 203 204 205 209 210 
-    ## neg neg neg neg neg neg neg neg pos neg neg neg pos pos neg pos pos neg 
-    ## 213 215 216 217 221 223 224 225 226 227 236 237 241 245 246 247 248 249 
-    ## pos neg neg neg neg neg neg neg pos neg neg neg neg neg pos neg neg neg 
-    ## 256 260 263 264 269 271 272 273 276 277 278 279 280 285 293 298 300 301 
-    ## pos neg neg neg neg neg pos neg neg pos neg neg neg neg neg neg neg pos 
-    ## 303 305 309 310 314 315 317 329 331 338 339 340 345 348 350 351 353 356 
-    ## neg neg pos neg neg neg neg neg neg neg neg pos neg neg neg neg pos neg 
-    ## 359 362 363 364 367 369 370 374 375 376 381 385 388 389 401 402 406 407 
-    ## neg neg pos neg neg neg pos neg neg pos neg neg neg neg neg neg neg neg 
-    ## 408 410 411 414 415 416 421 424 429 431 434 435 438 446 447 449 454 456 
-    ## neg neg neg pos pos neg neg neg neg neg neg pos neg neg pos pos neg neg 
-    ## 460 469 470 474 477 485 488 490 491 496 505 511 519 520 521 522 531 534 
-    ## neg neg neg neg neg pos neg neg pos neg neg neg neg neg neg neg pos pos 
-    ## 537 541 544 546 550 553 554 561 563 570 573 579 581 584 586 588 589 591 
-    ## neg neg neg neg neg neg neg neg neg neg neg neg neg neg neg neg pos neg 
-    ## 593 603 605 608 611 614 619 620 627 628 630 633 637 638 646 647 649 651 
-    ## neg pos neg neg pos pos neg neg neg neg pos neg neg neg neg neg neg neg 
-    ## 656 657 658 659 661 665 670 673 682 685 686 687 693 695 699 701 703 705 
-    ## neg neg neg neg pos neg neg neg neg neg pos neg neg neg neg neg pos neg 
-    ## 707 709 712 713 714 718 720 721 722 724 726 731 733 742 751 753 754 756 
-    ## neg neg neg neg neg neg pos neg neg neg neg neg neg neg neg pos neg pos 
-    ## 760 762 766 768 
-    ## neg pos neg neg 
-    ## Levels: neg pos
 
 ``` r
 library(caret) # install.packages("caret") #計算參數的packages
@@ -155,27 +122,27 @@ library(caret) # install.packages("caret") #計算參數的packages
 sensitivity(MineAns,PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==T,]$diabetes)
 ```
 
-    ## [1] 0.9360465
+    ## [1] 0.9766082
 
 ``` r
 specificity(MineAns,PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==T,]$diabetes)
 ```
 
-    ## [1] 0.5
+    ## [1] 0.4588235
 
 ``` r
 posPredValue(MineAns,PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==T,]$diabetes)
 ```
 
-    ## [1] 0.7931034
+    ## [1] 0.7840376
 
 ``` r
 negPredValue(MineAns,PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==T,]$diabetes)
 ```
 
-    ## [1] 0.7924528
+    ## [1] 0.9069767
 
--   敏感度 93.6046512%
--   特異性 50%
--   陽性預測率 79.3103448%
--   陰性預測率 79.245283%
+-   敏感度 97.6608187%
+-   特異性 45.8823529%
+-   陽性預測率 78.4037559%
+-   陰性預測率 90.6976744%

@@ -43,16 +43,17 @@ c(sum(PimaIndiansDiabetesC$Test==F),sum(PimaIndiansDiabetesC$Test==T))
 
 ## 箇代家ミ
 
-パ跑计块じ摸跑计珿匡拒呸胯癹耴簍衡猭ミ家ㄏノ蛮硋˙匡拒程ㄎ把计舱
+パ跑计块じ摸跑计珿匡拒跑计絬┦癹耴簍衡猭ミ家ㄏノ蛮硋˙匡拒程ㄎ把计舱
 ```{r}
-fit<-glm(diabetes~., PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==F,],family="binomial")
+fit<-glm(diabetes~age+pedigree+mass+insulin+triceps+pressure+glucose+pregnant, PimaIndiansDiabetesC[PimaIndiansDiabetesC$Test==F,],family="binomial")
+
 library(MASS)
 finalFit<-stepAIC(fit,direction = "both",trace = F)
 summary(finalFit)$coefficients
 ```
 
 ##家弧
-パ瓃把计ㄏノ贺把计ㄓ浪代砰┮眔戈呸胯癹耴ミ家箇代琌縸Э痜眞竒程ㄎて家ㄏノ把计pregnant, glucose, pressure, mass, pedigree,4把计把计眖砰浪代ㄓ计沮
+パ瓃把计ㄏノ贺把计ㄓ浪代砰┮眔戈跑计絬┦癹耴ミ家箇代琌縸Э痜眞竒程ㄎて家ㄏノ把计age,pedigree+mass,insulin,triceps,pressure,glucose,pregnant把计把计眖砰浪代ㄓ计沮
 
 ##箇代家喷靡
 
